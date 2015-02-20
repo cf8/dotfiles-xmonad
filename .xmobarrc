@@ -1,0 +1,15 @@
+Config { font = "-*-terminus-medium-*-*-*-12-*-*-*-*-*-*-u"
+  , bgColor = "#1d1f21"
+  , fgColor = "#ffffff"
+  , position = TopSize C 100 8
+  , alignSep = "}{"
+  , commands = [ Run StdinReader
+    , Run MultiCpu ["-L", "0", "-H", "80", "-t", "cpu: <total>%", "--low", "#b6be59", "--normal", "#87afaf", "--high", "#d7875f"] 10
+    , Run Memory ["-t", "mem: <usedratio>%", "--low", "#b6be59", "--normal", "#87afaf", "--high", "#d7875f"] 10
+    , Run Network "eth0" ["-L", "1024", "-H", "8192", "-t", "eth0: <rx>KB", "--low", "#b6be59", "--normal", "#87afaf", "--high", "#d7875f"] 10
+    , Run CoreTemp ["-t", "temp: <core0>C", "-L", "40", "-H", "60", "--low", "#b6be59", "--normal", "#87afaf", "--high", "#d7875f"] 50
+    , Run Kbd [("us(dvorak)", "DV"), ("us", "US")]
+    , Run Date "<fc=#aaaaaa>%a %_d.%m.%y</fc> <fc=#1d1f21,#87afaf> %H:%M:%S </fc>" "time" 10
+  ]
+  , template = " %StdinReader% }{ <fc=#aaaaaa>%coretemp%</fc> <fc=#aaaaaa> %eth0% </fc><fc=#aaaaaa> %multicpu% </fc><fc=#aaaaaa> %memory% </fc> %time% | @%swatch% "
+}
